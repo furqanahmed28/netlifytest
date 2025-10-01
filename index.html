@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FoodHub - Restaurant Marketplace</title>
+  <style>
+    :root {
+      --primary: #ff6b35;
+      --secondary: #4e4e4e;
+      --bg: #fff9f5;
+      --accent: #2f2f2f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--secondary);
+    }
+
+    header {
+      background: var(--primary);
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      margin-left: 1.2rem;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--bg);
+    }
+
+    .page {
+      display: none;
+      padding: 2rem;
+      animation: fade 0.5s ease-in-out;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .menu-item {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .menu-item img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+
+    .menu-item h3 {
+      margin: 0.5rem 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #eee;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav a {
+        margin: 0.5rem 0 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🍔 FoodHub</h1>
+    <nav>
+      <a href="#home" onclick="navigate('home')">Home</a>
+      <a href="#menu" onclick="navigate('menu')">Menu</a>
+      <a href="#about" onclick="navigate('about')">About</a>
+      <a href="#contact" onclick="navigate('contact')">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="page active">
+      <h2>Welcome to FoodHub</h2>
+      <p>Discover and order from top-rated restaurants near you.</p>
+      <img src="https://source.unsplash.com/800x400/?restaurant,food" alt="Restaurant" style="width:100%;margin-top:1rem;border-radius:10px;">
+    </section>
+
+    <section id="menu" class="page">
+      <h2>Popular Dishes</h2>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <img src="https://source.unsplash.com/200x150/?pizza" alt="Pizza">
+          <h3>Italian Pizza</h3>
+          <p>$12.99</p>
+        </div>
+        <div class="menu-item">
+          <img src="https://source.unsplash.com/200x150/?burger" alt="Burger">
+          <h3>Beef Burger</h3>
+          <p>$9.49</p>
+        </div>
+        <div class="menu-item">
+          <img src="https://source.unsplash.com/200x150/?sushi" alt="Sushi">
+          <h3>Salmon Sushi</h3>
+          <p>$14.25</p>
+        </div>
+        <div class="menu-item">
+          <img src="https://source.unsplash.com/200x150/?taco" alt="Taco">
+          <h3>Mexican Taco</h3>
+          <p>$7.89</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="page">
+      <h2>About FoodHub</h2>
+      <p>We connect food lovers with their favorite restaurants. At FoodHub, our mission is to make delicious food accessible from the comfort of your home.</p>
+      <p>Launched in 2025, we now serve customers in over 100 cities worldwide.</p>
+    </section>
+
+    <section id="contact" class="page">
+      <h2>Contact Us</h2>
+      <p>Email: support@foodhub.com</p>
+      <p>Phone: +1 234 567 890</p>
+      <p>Address: 123 Foodie Lane, Flavor Town, USA</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 FoodHub Marketplace</p>
+  </footer>
+
+  <script>
+    function navigate(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+      history.pushState(null, '', `#${pageId}`);
+    }
+
+    // Handle back/forward browser buttons
+    window.addEventListener('load', () => {
+      const page = location.hash.replace('#', '') || 'home';
+      navigate(page);
+    });
+
+    window.addEventListener('hashchange', () => {
+      const page = location.hash.replace('#', '') || 'home';
+      navigate(page);
+    });
+  </script>
+</body>
+</html>
